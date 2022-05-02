@@ -1,5 +1,5 @@
 const express = require("express");
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const cors = require("cors");
 require("dotenv").config();
 const app = express();
@@ -37,6 +37,19 @@ async function run() {
         results = await carCollections.find({}).toArray();
       }
       res.send(results);
+    });
+
+    // Delete data
+    app.delete("/car/:id", async (req, res) => {
+      const result = await carCollections.deleteOne({
+        _id: ObjectId(req.params.id),
+      });
+      res.send(result);
+    });
+    // Add Data
+    app.post("/addcar", async (req, res) => {
+      const result = await carCollections.insertOne(req.body);
+      res.send(result);
     });
   } finally {
     // await client.close();
