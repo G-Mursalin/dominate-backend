@@ -45,6 +45,17 @@ async function run() {
       });
       res.send(result);
     });
+    // Update data
+    app.put("/car/:id", async (req, res) => {
+      const result = await carCollections.updateOne(
+        { _id: ObjectId(req.params.id) },
+        {
+          $set: { available: req.body.available },
+        },
+        { upsert: true }
+      );
+      res.send(result);
+    });
     // Delete data
     app.delete("/car/:id", async (req, res) => {
       const result = await carCollections.deleteOne({
