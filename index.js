@@ -17,6 +17,32 @@ const client = new MongoClient(uri, {
   useUnifiedTopology: true,
   serverApi: ServerApiVersion.v1,
 });
+// Operations
+async function run() {
+  try {
+    await client.connect();
+    const carCollections = client.db("carCollections").collection("cars");
+
+    // Get Data
+    app.get("/cars", async (req, res) => {
+      const dataSize = parseInt(req.query.size);
+      let results;
+      if (dataSize) {
+        results = await carCollections
+          .find({})
+          .skip(0)
+          .limit(dataSize)
+          .toArray();
+      } else {
+        results = await carCollections.find({}).toArray();
+      }
+      res.send(results);
+    });
+  } finally {
+    // await client.close();
+  }
+}
+run().catch(console.dir);
 
 // Paths
 app.get("/", (req, res) => {
