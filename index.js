@@ -23,7 +23,7 @@ async function run() {
     await client.connect();
     const carCollections = client.db("carCollections").collection("cars");
 
-    // Get Data
+    // Get All Data
     app.get("/cars", async (req, res) => {
       const dataSize = parseInt(req.query.size);
       let results;
@@ -38,7 +38,13 @@ async function run() {
       }
       res.send(results);
     });
-
+    // Get one data using id
+    app.get("/car/:id", async (req, res) => {
+      const result = await carCollections.findOne({
+        _id: ObjectId(req.params.id),
+      });
+      res.send(result);
+    });
     // Delete data
     app.delete("/car/:id", async (req, res) => {
       const result = await carCollections.deleteOne({
