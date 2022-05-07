@@ -38,6 +38,12 @@ async function run() {
       }
       res.send(results);
     });
+    // Get Data vai Email
+    app.get("/mycars", async (req, res) => {
+      const email = req.query.email;
+      const results = await carCollections.find({ email: email }).toArray();
+      res.send(results);
+    });
     // Get one data using id
     app.get("/car/:id", async (req, res) => {
       const result = await carCollections.findOne({
