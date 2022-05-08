@@ -54,7 +54,6 @@ async function run() {
 
     // Delete data
     app.delete("/car/:id", async (req, res) => {
-      console.log(req.headers.authorization);
       const [email, accessToken] = req.headers.authorization.split(" ");
       if (email === verifyToken(accessToken).email) {
         const result = await carCollections.deleteOne({
@@ -67,20 +66,30 @@ async function run() {
     });
     // Update data
     app.put("/car/:id", async (req, res) => {
-      const result = await carCollections.updateOne(
-        { _id: ObjectId(req.params.id) },
-        {
-          $set: { available: req.body.available },
-        },
-        { upsert: true }
-      );
-      res.send(result);
+      const [email, accessToken] = req.headers.authorization.split(" ");
+      if (email === verifyToken(accessToken).email) {
+        const result = await carCollections.updateOne(
+          { _id: ObjectId(req.params.id) },
+          {
+            $set: { available: req.body.available },
+          },
+          { upsert: true }
+        );
+        res.send({ success: "Updated successfully" });
+      } else {
+        res.send({ success: "Unauthorize Access" });
+      }
     });
 
     // Add Data
     app.post("/addcar", async (req, res) => {
-      const result = await carCollections.insertOne(req.body);
-      res.send(result);
+      const [email, accessToken] = req.headers.authorization.split(" ");
+      if (email === verifyToken(accessToken).email) {
+        const result = await carCollections.insertOne(req.body);
+        res.send({ success: "Updated successfully" });
+      } else {
+        res.send({ success: "Unauthorize Access" });
+      }
     });
 
     //JWT
