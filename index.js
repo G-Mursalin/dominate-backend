@@ -95,7 +95,6 @@ async function run() {
     //JWT
     app.post("/login", async (req, res) => {
       const userEmail = req.body;
-      console.log(userEmail);
       const token = jwt.sign(userEmail, process.env.ACCESS_TOKEN_SECRET);
       res.send({ token });
     });
