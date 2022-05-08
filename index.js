@@ -106,7 +106,7 @@ run().catch(console.dir);
 
 // Paths
 app.get("/", (req, res) => {
-  res.send("Hello Server!");
+  res.send("Running DOMINATE server");
 });
 
 // Listening
