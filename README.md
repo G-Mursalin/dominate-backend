@@ -2,11 +2,11 @@
 
 ## Website Description:
 
-Find all vehicles, services, dealers in your area and everything about the cars right here.
+Find all vehicles, services, dealers in your area, and everything about the cars you want to know right here
 
 ## Website Live Link:
 
-Link: [https://dominate-db3ff.web.app/](https://dominate-db3ff.web.app/)
+Link: [https://dominate-db3ff.firebaseapp.com/](https://dominate-db3ff.firebaseapp.com/)
 
 # Technology Used:
 
@@ -24,18 +24,11 @@ Link: [https://dominate-db3ff.web.app/](https://dominate-db3ff.web.app/)
 - Express JS
 - Dotenv
 - MongoDb
-- Heroku
+- Render
 
 # Website's Features and Functionality:
 
-- See the best cars around the world
-- User can create own account
-- Add any cars
-- Delete any cars
-- Find your best car
-- Car details
-- Show your cars you added
-
-# Stackoverflow Question Link:
-
-Link: [https://stackoverflow.com/questions/72161690/how-do-i-get-all-dates-of-fridays-of-a-particular-year-in-javascript](https://stackoverflow.com/questions/72161690/how-do-i-get-all-dates-of-fridays-of-a-particular-year-in-javascript)
+- Implemented firebase authentication system
+- Used MongoDB as backend
+- Add any car
+- Delete any car
